@@ -18,6 +18,7 @@ local function getService(name)
     return if cloneref then cloneref(service) else service
 end
 
+wait(1)
 -- Loads and executes a function hosted on a remote URL. Cancels the request if the requested URL takes too long to respond.
 -- Errors with the function are caught and logged to the output
 local function loadWithTimeout(url: string, timeout: number?): ...any
@@ -68,6 +69,8 @@ local function loadWithTimeout(url: string, timeout: number?): ...any
 	return if success then result else nil
 end
 
+wait(1)
+
 local requestsDisabled = getgenv and getgenv().DISABLE_RAYFIELD_REQUESTS
 local InterfaceBuild = '3K3W'
 local Release = "Build 1.672"
@@ -87,6 +90,7 @@ local settingsTable = {
 	}
 }
 
+wait(1)
 local HttpService = getService('HttpService')
 local RunService = getService('RunService')
 
@@ -99,7 +103,7 @@ local cachedSettings
 local request = (syn and syn.request) or (fluxus and fluxus.request) or (http and http.request) or http_request or request
 
 
-
+wait(1)
 local function loadSettings()
 	local file = nil
 	
@@ -150,6 +154,7 @@ local function loadSettings()
 			end
 		end)
 	end)
+wait(1)
 	
 	if not success then 
 		if writefile then
@@ -158,6 +163,7 @@ local function loadSettings()
 	end
 end
 
+wait(1)
 if debugX then
 	warn('Now Loading Settings Configuration')
 end
@@ -168,30 +174,7 @@ if debugX then
 	warn('Settings Loaded')
 end
 
---if not cachedSettings or not cachedSettings.System or not cachedSettings.System.usageAnalytics then
---	local fileFunctionsAvailable = isfile and writefile and readfile
-
---	if not fileFunctionsAvailable and not useStudio then
---		warn('Rayfield Interface Suite | Sirius Analytics:\n\n\nAs you don\'t have file functionality with your executor, we are unable to save whether you want to opt in or out to analytics.\nIf you do not want to take part in anonymised usage statistics, let us know in our Discord at sirius.menu/discord and we will manually opt you out.')
---		analytics = true	
---	else
---		prompt.create(
---			'Help us improve',
---	            [[Would you like to allow Sirius to collect usage statistics?
-
---<font transparency='0.4'>No data is linked to you or your personal activity.</font>]],
---			'Continue',
---			'Cancel',
---			function(result)
---				settingsTable.System.usageAnalytics.Value = result
---				analytics = result
---			end
---		)
---	end
-
---	repeat task.wait() until analytics ~= nil
---end
-
+wait(1)
 if not requestsDisabled then
 	if debugX then
 		warn('Querying Settings for Reporter Information')
@@ -223,10 +206,12 @@ if not requestsDisabled then
 	end
 end
 
+wait(1)
 if debugX then
 	warn('Moving on to continue initialisation')
 end
 
+wait(1)
 local RayfieldLibrary = {
 	Flags = {},
 	Theme = {
@@ -271,6 +256,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(65, 65, 65),
 			PlaceholderColor = Color3.fromRGB(178, 178, 178)
 		},
+wait(1)
 
 		Ocean = {
 			TextColor = Color3.fromRGB(230, 240, 240),
@@ -313,6 +299,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(50, 70, 70),
 			PlaceholderColor = Color3.fromRGB(140, 160, 160)
 		},
+wait(1)
 
 		AmberGlow = {
 			TextColor = Color3.fromRGB(255, 245, 230),
@@ -355,7 +342,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(90, 65, 50),
 			PlaceholderColor = Color3.fromRGB(190, 150, 130)
 		},
-
+wait(1)
 		Light = {
 			TextColor = Color3.fromRGB(40, 40, 40),
 
@@ -397,7 +384,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(180, 180, 180),
 			PlaceholderColor = Color3.fromRGB(140, 140, 140)
 		},
-
+wait(1)
 		Amethyst = {
 			TextColor = Color3.fromRGB(240, 240, 240),
 
@@ -439,7 +426,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(80, 50, 110),
 			PlaceholderColor = Color3.fromRGB(178, 150, 200)
 		},
-
+wait(1)
 		Green = {
 			TextColor = Color3.fromRGB(30, 60, 30),
 
@@ -481,7 +468,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(180, 200, 180),
 			PlaceholderColor = Color3.fromRGB(120, 140, 120)
 		},
-
+wait(1)
 		Bloom = {
 			TextColor = Color3.fromRGB(60, 40, 50),
 
@@ -523,7 +510,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(220, 190, 200),
 			PlaceholderColor = Color3.fromRGB(170, 130, 140)
 		},
-
+wait(1)
 		DarkBlue = {
 			TextColor = Color3.fromRGB(230, 230, 230),
 
@@ -565,7 +552,7 @@ local RayfieldLibrary = {
 			InputStroke = Color3.fromRGB(45, 50, 60), 
 			PlaceholderColor = Color3.fromRGB(150, 150, 160)
 		},
-
+wait(1)
 		Serenity = {
 			TextColor = Color3.fromRGB(50, 55, 60),
 			Background = Color3.fromRGB(240, 245, 250),
@@ -609,7 +596,7 @@ local RayfieldLibrary = {
 	}
 }
 
-
+wait(1)
 -- Services
 local UserInputService = getService("UserInputService")
 local TweenService = getService("TweenService")
@@ -623,6 +610,8 @@ local buildAttempts = 0
 local correctBuild = false
 local warned
 local globalLoaded
+
+wait(1)
 
 repeat
 	if Rayfield:FindFirstChild('Build') and Rayfield.Build.Value == InterfaceBuild then
@@ -644,6 +633,8 @@ repeat
 	buildAttempts = buildAttempts + 1
 until buildAttempts >= 2
 
+wait(1)
+
 Rayfield.Enabled = false
 
 if gethui then
@@ -656,6 +647,8 @@ elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
 elseif not useStudio then
 	Rayfield.Parent = CoreGui
 end
+
+wait(1)
 
 if gethui then
 	for _, Interface in ipairs(gethui():GetChildren()) do
@@ -673,6 +666,7 @@ elseif not useStudio then
 	end
 end
 
+wait(1)
 
 local minSize = Vector2.new(1024, 768)
 local useMobileSizing
@@ -685,6 +679,7 @@ if UserInputService.TouchEnabled then
 	useMobilePrompt = true
 end
 
+wait(1)
 
 -- Object Variables
 
@@ -698,13 +693,14 @@ local dragBar = Rayfield:FindFirstChild('Drag')
 local dragInteract = dragBar and dragBar.Interact or nil
 local dragBarCosmetic = dragBar and dragBar.Drag or nil
 
+wait(1)
+
 local dragOffset = 255
 local dragOffsetMobile = 150
 
 Rayfield.DisplayOrder = 100
 LoadingFrame.Version.Text = Release
 
--- Thanks to Latte Softworks for the Lucide integration for Roblox
 local Icons = useStudio and require(script.Parent.icons) or loadWithTimeout('https://raw.githubusercontent.com/SiriusSoftwareLtd/Rayfield/refs/heads/main/icons.lua')
 -- Variables
 
@@ -716,7 +712,11 @@ local Debounce = false
 local searchOpen = false
 local Notifications = Rayfield.Notifications
 
+wait(1)
+
 local SelectedTheme = RayfieldLibrary.Theme.Default
+
+wait(1)
 
 local function ChangeTheme(Theme)
 	if typeof(Theme) == 'string' then
@@ -764,6 +764,8 @@ local function ChangeTheme(Theme)
 	end
 end
 
+wait(1)
+
 local function getIcon(name : string): {id: number, imageRectSize: Vector2, imageRectOffset: Vector2}
 	if not Icons then
 		warn("Lucide Icons: Cannot use icons as icons library is not loaded")
@@ -794,6 +796,8 @@ local function getIcon(name : string): {id: number, imageRectSize: Vector2, imag
 
 	return asset
 end
+
+wait(1)
 -- Converts ID to asset URI. Returns rbxassetid://0 if ID is not a number
 local function getAssetUri(id: any): string
 	local assetUri = "rbxassetid://0" -- Default to empty image
@@ -806,7 +810,7 @@ local function getAssetUri(id: any): string
 	end
 	return assetUri
 end
-
+wait(1)
 local function makeDraggable(object, dragObject, enableTaptic, tapticOffset)
 	local dragging = false
 	local relative = nil
@@ -832,7 +836,7 @@ local function makeDraggable(object, dragObject, enableTaptic, tapticOffset)
 			end)
 		end
 	end
-
+wait(1)
 	connectFunctions()
 
 	dragObject.InputBegan:Connect(function(input, processed)
@@ -848,7 +852,7 @@ local function makeDraggable(object, dragObject, enableTaptic, tapticOffset)
 			end
 		end
 	end)
-
+wait(1)
 	local inputEnded = UserInputService.InputEnded:Connect(function(input)
 		if not dragging then return end
 
@@ -863,7 +867,7 @@ local function makeDraggable(object, dragObject, enableTaptic, tapticOffset)
 			end
 		end
 	end)
-
+wait(1)
 	local renderStepped = RunService.RenderStepped:Connect(function()
 		if dragging and not Hidden then
 			local position = UserInputService:GetMouseLocation() + relative + offset
@@ -878,7 +882,7 @@ local function makeDraggable(object, dragObject, enableTaptic, tapticOffset)
 			end
 		end
 	end)
-
+wait(1)
 	object.Destroying:Connect(function()
 		if inputEnded then inputEnded:Disconnect() end
 		if renderStepped then renderStepped:Disconnect() end
@@ -925,7 +929,7 @@ local function LoadConfiguration(Configuration)
 
 	return changed
 end
-
+wait(1)
 local function SaveConfiguration()
 	if not CEnabled or not globalLoaded then return end
 
@@ -974,7 +978,7 @@ local function SaveConfiguration()
 		writefile(ConfigurationFolder .. "/" .. CFileName .. ConfigurationExtension, tostring(HttpService:JSONEncode(Data)))
 	end
 end
-
+wait(1)
 function RayfieldLibrary:Notify(data) -- action e.g open messages
 	task.spawn(function()
 
@@ -1071,7 +1075,7 @@ function RayfieldLibrary:Notify(data) -- action e.g open messages
 		newNotification:Destroy()
 	end)
 end
-
+wait(1)
 local function openSearch()
 	searchOpen = true
 
@@ -1135,7 +1139,7 @@ local function closeSearch()
 	Main.Search.Input.Text = ''
 	Main.Search.Input.Interactable = false
 end
-
+wait(1)
 local function Hide(notify: boolean?)
 	if MPrompt then
 		MPrompt.Title.TextColor3 = Color3.fromRGB(255, 255, 255)
@@ -1219,7 +1223,7 @@ local function Hide(notify: boolean?)
 	Main.Visible = false
 	Debounce = false
 end
-
+wait(1)
 local function Maximise()
 	Debounce = true
 	Topbar.ChangeSize.Image = "rbxassetid://"..10137941941
@@ -1284,7 +1288,7 @@ local function Maximise()
 	Debounce = false
 end
 
-
+wait(1)
 local function Unhide()
 	Debounce = true
 	Main.Position = UDim2.new(0.5, 0, 0.5, 0)
@@ -1374,7 +1378,7 @@ local function Unhide()
 	Minimised = false
 	Debounce = false
 end
-
+wait(1)
 local function Minimise()
 	Debounce = true
 	Topbar.ChangeSize.Image = "rbxassetid://"..11036884234
@@ -1433,7 +1437,7 @@ local function Minimise()
 	task.wait(0.2)
 	Debounce = false
 end
-
+wait(1)
 local function updateSettings()
 	local encoded
 	local success, err = pcall(function()
@@ -1451,7 +1455,7 @@ local function updateSettings()
 		end
 	end
 end
-
+wait(1)
 local function createSettings(window)
 	if not (writefile and isfile and readfile and isfolder and makefolder) and not useStudio then
 		if Topbar['Settings'] then Topbar.Settings.Visible = false end
@@ -1518,6 +1522,7 @@ local function createSettings(window)
 	updateSettings()
 end
 
+wait(1)
 
 
 function RayfieldLibrary:CreateWindow(Settings)
@@ -1788,7 +1793,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(KeyMain.NoteMessage, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 			task.wait(0.15)
 			TweenService:Create(KeyMain.Hide, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {ImageTransparency = 0.3}):Play()
-
+wait(1)
 
 			KeyUI.Main.Input.InputBox.FocusLost:Connect(function()
 				if #KeyUI.Main.Input.InputBox.Text == 0 then return end
@@ -1883,7 +1888,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	if Settings.KeySystem then
 		repeat task.wait() until Passthrough
 	end
-
+wait(1)
 	Notifications.Template.Visible = false
 	Notifications.Visible = true
 	Rayfield.Enabled = true
@@ -1904,7 +1909,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 	Elements.UIPageLayout.FillDirection = Enum.FillDirection.Horizontal
 	TabList.Template.Visible = false
-
+wait(1)
 	-- Tab
 	local FirstTab = false
 	local Window = {}
@@ -1936,7 +1941,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 		end
 
 
-
+wait(1)
 		TabButton.BackgroundTransparency = 1
 		TabButton.Title.TextTransparency = 1
 		TabButton.Image.ImageTransparency = 1
@@ -1975,7 +1980,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TabButton.Image.ImageColor3 = SelectedTheme.TabTextColor
 			TabButton.Title.TextColor3 = SelectedTheme.TabTextColor
 		end
-
+wait(1)
 
 		-- Animate
 		task.wait(0.1)
@@ -1997,7 +2002,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			TweenService:Create(TabButton.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 		end
 
-
+wait(1)
 		TabButton.Interact.MouseButton1Click:Connect(function()
 			if Minimised then return end
 			TweenService:Create(TabButton, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0}):Play()
@@ -2019,7 +2024,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					TweenService:Create(OtherTabButton.UIStroke, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {Transparency = 0.5}):Play()
 				end
 			end
-
+wait(1)
 			if Elements.UIPageLayout.CurrentPage ~= TabPage then
 				Elements.UIPageLayout:JumpTo(TabPage)
 			end
@@ -2091,7 +2096,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return ButtonValue
 		end
-
+wait(1)
 		-- ColorPicker
 		function Tab:CreateColorPicker(ColorPickerSettings) -- by Throit
 			ColorPickerSettings.Type = "ColorPicker"
@@ -2169,7 +2174,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				end
 
 			end)
-
+wait(1)
 			UserInputService.InputEnded:Connect(function(input, gameProcessed) if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then 
 					mainDragging = false
 					sliderDragging = false
@@ -2265,7 +2270,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 				rgbBoxes(ColorPicker.RGB.BInput.InputBox,"B")
 				pcall(function()ColorPickerSettings.Callback(Color3.fromHSV(h,s,v))end)
 			end)
-
+wait(1)
 			RunService.RenderStepped:connect(function()
 				if mainDragging then 
 					local localX = math.clamp(mouse.X-Main.AbsolutePosition.X,0,Main.AbsoluteSize.X)
@@ -2309,7 +2314,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end
 			end)
-
+wait(1)
 			if Settings.ConfigurationSaving then
 				if Settings.ConfigurationSaving.Enabled and ColorPickerSettings.Flag then
 					RayfieldLibrary.Flags[ColorPickerSettings.Flag] = ColorPickerSettings
@@ -2330,7 +2335,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 			ColorPicker.MouseLeave:Connect(function()
 				TweenService:Create(ColorPicker, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackground}):Play()
 			end)
-
+wait(1)
 			Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 				for _, rgbinput in ipairs(ColorPicker.RGB:GetChildren()) do
 					if rgbinput:IsA("Frame") then
@@ -2345,7 +2350,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return ColorPickerSettings
 		end
-
+wait(1)
 		-- Section
 		function Tab:CreateSection(SectionName)
 
@@ -2373,7 +2378,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return SectionValue
 		end
-
+wait(1)
 		-- Divider
 		function Tab:CreateDivider()
 			local DividerValue = {}
@@ -2391,7 +2396,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return DividerValue
 		end
-
+wait(1)
 		-- Label
 		function Tab:CreateLabel(LabelText : string, Icon: number, Color : Color3, IgnoreTheme : boolean)
 			local LabelValue = {}
@@ -2486,7 +2491,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return LabelValue
 		end
-
+wait(1)
 		-- Paragraph
 		function Tab:CreateParagraph(ParagraphSettings)
 			local ParagraphValue = {}
@@ -2522,7 +2527,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return ParagraphValue
 		end
-
+wait(1)
 		-- Input
 		function Tab:CreateInput(InputSettings)
 			local Input = Elements.Template.Input:Clone()
@@ -2612,7 +2617,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return InputSettings
 		end
-
+wait(1)
 		-- Dropdown
 		function Tab:CreateDropdown(DropdownSettings)
 			local Dropdown = Elements.Template.Dropdown:Clone()
@@ -2713,7 +2718,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end
 			end)
-
+wait(1)
 			Dropdown.MouseEnter:Connect(function()
 				if not Dropdown.List.Visible then
 					TweenService:Create(Dropdown, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {BackgroundColor3 = SelectedTheme.ElementBackgroundHover}):Play()
@@ -2855,7 +2860,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end)
 				end
 			end
-
+wait(1)
 			function DropdownSettings:Set(NewOption)
 				DropdownSettings.CurrentOption = NewOption
 
@@ -2930,7 +2935,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return DropdownSettings
 		end
-
+wait(1)
 		-- Keybind
 		function Tab:CreateKeybind(KeybindSettings)
 			local CheckingForKey = false
@@ -3030,7 +3035,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end
 			end)
-
+wait(1)
 			Keybind.KeybindFrame.KeybindBox:GetPropertyChangedSignal("Text"):Connect(function()
 				TweenService:Create(Keybind.KeybindFrame, TweenInfo.new(0.55, Enum.EasingStyle.Exponential, Enum.EasingDirection.Out), {Size = UDim2.new(0, Keybind.KeybindFrame.KeybindBox.TextBounds.X + 24, 0, 30)}):Play()
 			end)
@@ -3061,7 +3066,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return KeybindSettings
 		end
-
+wait(1)
 		-- Toggle
 		function Tab:CreateToggle(ToggleSettings)
 			local ToggleValue = {}
@@ -3200,7 +3205,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					SaveConfiguration()
 				end
 			end
-
+wait(1)
 			if not ToggleSettings.Ext then
 				if Settings.ConfigurationSaving then
 					if Settings.ConfigurationSaving.Enabled and ToggleSettings.Flag then
@@ -3356,7 +3361,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 					end
 				end)
 			end)
-
+wait(1)
 			function SliderSettings:Set(NewVal)
 				local NewVal = math.clamp(NewVal, SliderSettings.Range[1], SliderSettings.Range[2])
 
@@ -3404,7 +3409,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 
 			return SliderSettings
 		end
-
+wait(1)
 		Rayfield.Main:GetPropertyChangedSignal('BackgroundColor3'):Connect(function()
 			TabButton.UIStroke.Color = SelectedTheme.TabStroke
 
@@ -3423,7 +3428,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	end
 
 	Elements.Visible = true
-
+wait(1)
 
 	task.wait(1.1)
 	TweenService:Create(Main, TweenInfo.new(0.7, Enum.EasingStyle.Exponential, Enum.EasingDirection.InOut), {Size = UDim2.new(0, 390, 0, 90)}):Play()
@@ -3488,7 +3493,7 @@ function RayfieldLibrary:CreateWindow(Settings)
 	
 	return Window
 end
-
+wait(1)
 local function setVisibility(visibility: boolean, notify: boolean?)
 	if Debounce then return end
 	if visibility then
@@ -3524,7 +3529,7 @@ Topbar.ChangeSize.MouseButton1Click:Connect(function()
 		Minimise()
 	end
 end)
-
+wait(1)
 Main.Search.Input:GetPropertyChangedSignal('Text'):Connect(function()
 	if #Main.Search.Input.Text > 0 then
 		if not Elements.UIPageLayout.CurrentPage:FindFirstChild('SearchTitle-fsefsefesfsefesfesfThanks') then 
@@ -3578,7 +3583,7 @@ Topbar.Search.MouseButton1Click:Connect(function()
 		end
 	end)
 end)
-
+wait(1)
 if Topbar:FindFirstChild('Settings') then
 	Topbar.Settings.MouseButton1Click:Connect(function()
 		task.spawn(function()
@@ -3604,7 +3609,7 @@ end
 Topbar.Hide.MouseButton1Click:Connect(function()
 	setVisibility(Hidden, not useMobileSizing)
 end)
-
+wait(1)
 hideHotkeyConnection = UserInputService.InputBegan:Connect(function(input, processed)
 	if (input.KeyCode == Enum.KeyCode[settingsTable.General.rayfieldOpen.Value or 'K'] and not processed) then
 		if Debounce then return end
@@ -3640,7 +3645,7 @@ for _, TopbarButton in ipairs(Topbar:GetChildren()) do
 	end
 end
 
-
+wait(1)
 function RayfieldLibrary:LoadConfiguration()
 	local config
 
@@ -3683,7 +3688,7 @@ function RayfieldLibrary:LoadConfiguration()
 	globalLoaded = true
 end
 
-
+wait(1)
 
 if useStudio then
 	-- run w/ studio
@@ -3804,7 +3809,7 @@ if useStudio then
 			-- The variable (Value) is a number which correlates to the value the slider is currently at
 		end,
 	})
-
+wait(1)
 	local Input = Tab:CreateInput({
 		Name = "Input Example",
 		CurrentValue = "Helo",
@@ -3894,7 +3899,7 @@ if useStudio then
 
 	local Paragraph = Tab:CreateParagraph({Title = "Paragraph Example", Content = "Paragraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph ExampleParagraph Example"})
 end
-
+wait(1)
 if CEnabled and Main:FindFirstChild('Notice') then
 	Main.Notice.BackgroundTransparency = 1
 	Main.Notice.Title.TextTransparency = 1
