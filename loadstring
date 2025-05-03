@@ -644,34 +644,51 @@ repeat
 	buildAttempts = buildAttempts + 1
 until buildAttempts >= 2
 
+Rayfield.Name = "UI_" .. tostring(math.random(100000, 999999))
+Rayfield.Archivable = false
 Rayfield.Enabled = false
 
-if gethui then
-	Rayfield.Parent = gethui()
-elseif syn and syn.protect_gui then 
-	syn.protect_gui(Rayfield)
-	Rayfield.Parent = CoreGui
-elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
-	Rayfield.Parent = CoreGui:FindFirstChild("RobloxGui")
-elseif not useStudio then
-	Rayfield.Parent = CoreGui
+local CoreGui = game:GetService("CoreGui")
+
+local function getSafeParent()
+	if gethui then
+		return gethui()
+	elseif syn and syn.protect_gui then
+		syn.protect_gui(Rayfield)
+		return CoreGui
+	elseif not useStudio and CoreGui:FindFirstChild("RobloxGui") then
+		return CoreGui:FindFirstChild("RobloxGui")
+	else
+		return CoreGui
+	end
 end
 
-if gethui then
-	for _, Interface in ipairs(gethui():GetChildren()) do
-		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
-			Interface.Enabled = false
-			Interface.Name = "Rayfield-Old"
-		end
-	end
-elseif not useStudio then
-	for _, Interface in ipairs(CoreGui:GetChildren()) do
+Rayfield.Parent = getSafeParent()
+
+-- De-duplicate if another Rayfield is already present
+local function cleanupDuplicates(container)
+	for _, Interface in ipairs(container:GetChildren()) do
 		if Interface.Name == Rayfield.Name and Interface ~= Rayfield then
 			Interface.Enabled = false
 			Interface.Name = "Rayfield-Old"
 		end
 	end
 end
+
+local parentToCheck = gethui and gethui() or CoreGui
+cleanupDuplicates(parentToCheck)
+
+local minSize = Vector2.new(1024, 768)
+local useMobileSizing
+
+if Rayfield.AbsoluteSize.X < minSize.X and Rayfield.AbsoluteSize.Y < minSize.Y then
+	useMobileSizing = true
+end
+
+if UserInputService.TouchEnabled then
+	useMobilePrompt = true
+end
+
 
 
 local minSize = Vector2.new(1024, 768)
