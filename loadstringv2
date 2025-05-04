@@ -220,36 +220,40 @@ do
 			Name = title,
 			Parent = game.CoreGui
 		}, {
-			utility:Create("ImageLabel", {
+			utility:Create("Frame", {
 				Name = "Main",
-				BackgroundTransparency = 1,
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255),  -- White color
+				BackgroundTransparency = 0,
 				Position = UDim2.new(0.25, 0, 0.052435593, 0),
-				Size = UDim2.new(0, 511, 0, 428),
-				ImageColor3 = themes.Background,
-				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = Rect.new(4, 4, 296, 296)
+				Size = UDim2.new(0, 4, 0, 4),  -- 4px size
+				ZIndex = 1,
+				BorderSizePixel = 0,
+			}, {})
+
+		}, {
+			utility:Create("Frame", {
+				Name = "Glow",
+				BackgroundTransparency = 1,
+				Position = UDim2.new(0, -15, 0, -15),
+				Size = UDim2.new(1, 30, 1, 30),
+				ZIndex = 0,
+				BorderSizePixel = 2,  -- 2px border for glow effect
+				BorderColor3 = themes.Glow,  -- Glow color
+				BackgroundColor3 = Color3.fromRGB(0, 0, 0),  -- Transparent inside
+			}),
+
+			utility:Create("Frame", {
+				Name = "Pages",
+				BackgroundTransparency = 1,
+				ClipsDescendants = true,
+				Position = UDim2.new(0, 0, 0, 38),
+				Size = UDim2.new(0, 126, 1, -38),
+				ZIndex = 3,
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255),  -- White color
+				BorderSizePixel = 4,  -- 4px border for sidebar
+				BorderColor3 = themes.DarkContrast,  -- Border color based on theme
 			}, {
-				utility:Create("ImageLabel", {
-					Name = "Glow",
-					BackgroundTransparency = 1,
-					Position = UDim2.new(0, -15, 0, -15),
-					Size = UDim2.new(1, 30, 1, 30),
-					ZIndex = 0,
-					ImageColor3 = themes.Glow,
-					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = Rect.new(24, 24, 276, 276)
-				}),
-				utility:Create("ImageLabel", {
-					Name = "Pages",
-					BackgroundTransparency = 1,
-					ClipsDescendants = true,
-					Position = UDim2.new(0, 0, 0, 38),
-					Size = UDim2.new(0, 126, 1, -38),
-					ZIndex = 3,
-					ImageColor3 = themes.DarkContrast,
-					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = Rect.new(4, 4, 296, 296)
-				}, {
+
 					utility:Create("ScrollingFrame", {
 						Name = "Pages_Container",
 						Active = true,
@@ -265,16 +269,17 @@ do
 						})
 					})
 				}),
-				utility:Create("ImageLabel", {
-					Name = "TopBar",
-					BackgroundTransparency = 1,
-					ClipsDescendants = true,
-					Size = UDim2.new(1, 0, 0, 38),
-					ZIndex = 5,
-					ImageColor3 = themes.Accent,
-					ScaleType = Enum.ScaleType.Slice,
-					SliceCenter = Rect.new(4, 4, 296, 296)
-				}, {
+			utility:Create("Frame", {
+				Name = "TopBar",
+				BackgroundTransparency = 1,
+				ClipsDescendants = true,
+				Size = UDim2.new(1, 0, 0, 38),
+				ZIndex = 5,
+				BackgroundColor3 = Color3.fromRGB(255, 255, 255),  -- White color
+				BorderSizePixel = 4,  -- 4px border for header
+				BorderColor3 = themes.Accent,  -- Border color based on theme
+			}, {
+
 					utility:Create("TextLabel", { -- title
 						Name = "Title",
 						AnchorPoint = Vector2.new(0, 0.5),
@@ -290,7 +295,7 @@ do
 					})
 				})
 			})
-		})
+		
 
 		utility:InitializeKeybind()
 		utility:DraggingEnabled(container.Main.TopBar, container.Main)
@@ -376,17 +381,19 @@ do
 	end
 
 	function section.new(page, title)
-		local container = utility:Create("ImageLabel", {
+		local container = utility:Create("Frame", {
 			Name = title,
 			Parent = page.container,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(1, -10, 0, 28),
 			ZIndex = 2,
-			ImageColor3 = themes.LightContrast,
-			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = Rect.new(4, 4, 296, 296),
-			ClipsDescendants = true
+			BackgroundColor3 = Color3.fromRGB(255, 255, 255),  -- White color
+			BorderSizePixel = 2,  -- 2px border
+			BorderColor3 = themes.LightContrast,  -- Border color based on theme
+			ClipsDescendants = true,
+			CornerRadius = UDim.new(0, 10)  -- Rounded corners with 10px radius
 		}, {
+
 			utility:Create("Frame", {
 				Name = "Container",
 				Active = true,
@@ -549,34 +556,38 @@ do
 		end
 
 		-- standard create
-		local notification = utility:Create("ImageLabel", {
+		local notification = utility:Create("Frame", {
 			Name = "Notification",
 			Parent = self.container,
 			BackgroundTransparency = 1,
 			Size = UDim2.new(0, 200, 0, 60),
-			ImageColor3 = themes.Background,
-			ScaleType = Enum.ScaleType.Slice,
-			SliceCenter = Rect.new(4, 4, 296, 296),
+			BackgroundColor3 = themes.Background,  -- Set the background color to the theme's background color
+			BorderSizePixel = 2,  -- 2px border
+			BorderColor3 = themes.LightContrast,  -- Border color based on theme
 			ZIndex = 3,
-			ClipsDescendants = true
+			ClipsDescendants = true,
+			CornerRadius = UDim.new(0, 10)  -- Rounded corners with 10px radius
 		}, {
-			utility:Create("ImageLabel", {
+
+			utility:Create("Frame", {
 				Name = "Flash",
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
-				ImageColor3 = themes.TextColor,
+				BackgroundColor3 = themes.TextColor,
 				ZIndex = 5
 			}),
-			utility:Create("ImageLabel", {
+
+			utility:Create("Frame", {
 				Name = "Glow",
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0, -15, 0, -15),
 				Size = UDim2.new(1, 30, 1, 30),
 				ZIndex = 2,
-				ImageColor3 = themes.Glow,
-				ScaleType = Enum.ScaleType.Slice,
-				SliceCenter = Rect.new(24, 24, 276, 276)
+				BackgroundColor3 = themes.Glow,
+				BorderSizePixel = 2,
+				BorderColor3 = Color3.fromRGB(255, 255, 255)
 			}),
+
 			utility:Create("TextLabel", {
 				Name = "Title",
 				BackgroundTransparency = 1,
@@ -604,6 +615,7 @@ do
 				BackgroundTransparency = 1,
 				Position = UDim2.new(1, -26, 0, 8),
 				Size = UDim2.new(0, 16, 0, 16),
+				Image = "rbxassetid://5012538259",
 				ImageColor3 = themes.TextColor,
 				ZIndex = 4
 			}),
@@ -612,6 +624,7 @@ do
 				BackgroundTransparency = 1,
 				Position = UDim2.new(1, -26, 1, -24),
 				Size = UDim2.new(0, 16, 0, 16),
+				Image = "rbxassetid://5012538583",
 				ImageColor3 = themes.TextColor,
 				ZIndex = 4
 			})
@@ -706,6 +719,7 @@ do
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 30),
 			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.DarkContrast,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298)
@@ -778,6 +792,7 @@ do
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 30),
 			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.DarkContrast,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298)
@@ -803,6 +818,7 @@ do
 				Position = UDim2.new(1, -50, 0.5, -8),
 				Size = UDim2.new(0, 40, 0, 16),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = themes.LightContrast,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
@@ -813,6 +829,7 @@ do
 					Position = UDim2.new(0, 2, 0.5, -6),
 					Size = UDim2.new(1, -22, 1, -4),
 					ZIndex = 2,
+					Image = "rbxassetid://5028857472",
 					ImageColor3 = themes.TextColor,
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(2, 2, 298, 298)
@@ -859,6 +876,7 @@ do
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 30),
 			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.DarkContrast,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298)
@@ -883,6 +901,7 @@ do
 				Position = UDim2.new(1, -110, 0.5, -8),
 				Size = UDim2.new(0, 100, 0, 16),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = themes.LightContrast,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
@@ -975,6 +994,7 @@ do
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 30),
 			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.DarkContrast,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298)
@@ -999,6 +1019,7 @@ do
 				Position = UDim2.new(1, -110, 0.5, -8),
 				Size = UDim2.new(0, 100, 0, 16),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = themes.LightContrast,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1084,6 +1105,7 @@ do
 			BorderSizePixel = 0,
 			Size = UDim2.new(1, 0, 0, 30),
 			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.DarkContrast,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1109,6 +1131,7 @@ do
 				Position = UDim2.new(1, -50, 0.5, -7),
 				Size = UDim2.new(0, 40, 0, 14),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = Color3.fromRGB(255, 255, 255),
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1123,6 +1146,7 @@ do
 			Selectable = true,
 			AnchorPoint = Vector2.new(0.5, 0.5),
 			Size = UDim2.new(0, 162, 0, 169),
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.Background,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298),
@@ -1134,6 +1158,7 @@ do
 				Position = UDim2.new(0, -15, 0, -15),
 				Size = UDim2.new(1, 30, 1, 30),
 				ZIndex = 0,
+				Image = "rbxassetid://5028857084",
 				ImageColor3 = themes.Glow,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(22, 22, 278, 278)
@@ -1156,6 +1181,7 @@ do
 				Position = UDim2.new(1, -26, 0, 8),
 				Size = UDim2.new(0, 16, 0, 16),
 				ZIndex = 2,
+				Image = "rbxassetid://5012538583",
 				ImageColor3 = themes.TextColor
 			}),
 			utility:Create("Frame", {
@@ -1174,6 +1200,7 @@ do
 					BorderColor3 = themes.LightContrast,
 					Size = UDim2.new(1, 0, 0, 60),
 					AutoButtonColor = false,
+					Image = "rbxassetid://5108535320",
 					ImageColor3 = Color3.fromRGB(255, 0, 0),
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1182,12 +1209,14 @@ do
 						Name = "White_Overlay",
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 60),
+						Image = "rbxassetid://5107152351",
 						SliceCenter = Rect.new(2, 2, 298, 298)
 					}),
 					utility:Create("ImageLabel", {
 						Name = "Black_Overlay",
 						BackgroundTransparency = 1,
 						Size = UDim2.new(1, 0, 0, 60),
+						Image = "rbxassetid://5107152095",
 						SliceCenter = Rect.new(2, 2, 298, 298)
 					}),
 					utility:Create("ImageLabel", {
@@ -1197,6 +1226,7 @@ do
 						BackgroundTransparency = 1.000,
 						Size = UDim2.new(0, 10, 0, 10),
 						Position = UDim2.new(0, 0, 0, 0),
+						Image = "rbxassetid://5100115962",
 						SliceCenter = Rect.new(2, 2, 298, 298)
 					})
 				}),
@@ -1209,6 +1239,7 @@ do
 					Size = UDim2.new(1, 0, 0, 16),
 					ZIndex = 2,
 					AutoButtonColor = false,
+					Image = "rbxassetid://5028857472",
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(2, 2, 298, 298)
 				}, {
@@ -1249,6 +1280,7 @@ do
 						BorderSizePixel = 0,
 						Size = UDim2.new(0.305, 0, 1, 0),
 						ZIndex = 2,
+						Image = "rbxassetid://5028857472",
 						ImageColor3 = themes.DarkContrast,
 						ScaleType = Enum.ScaleType.Slice,
 						SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1282,6 +1314,7 @@ do
 						BorderSizePixel = 0,
 						Size = UDim2.new(0.305, 0, 1, 0),
 						ZIndex = 2,
+						Image = "rbxassetid://5028857472",
 						ImageColor3 = themes.DarkContrast,
 						ScaleType = Enum.ScaleType.Slice,
 						SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1314,6 +1347,7 @@ do
 						BorderSizePixel = 0,
 						Size = UDim2.new(0.305, 0, 1, 0),
 						ZIndex = 2,
+						Image = "rbxassetid://5028857472",
 						ImageColor3 = themes.DarkContrast,
 						ScaleType = Enum.ScaleType.Slice,
 						SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1347,6 +1381,7 @@ do
 					BorderSizePixel = 0,
 					Size = UDim2.new(1, 0, 0, 20),
 					ZIndex = 2,
+					Image = "rbxassetid://5028857472",
 					ImageColor3 = themes.DarkContrast,
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1608,6 +1643,7 @@ do
 			Position = UDim2.new(0.292817682, 0, 0.299145311, 0),
 			Size = UDim2.new(1, 0, 0, 50),
 			ZIndex = 2,
+			Image = "rbxassetid://5028857472",
 			ImageColor3 = themes.DarkContrast,
 			ScaleType = Enum.ScaleType.Slice,
 			SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1653,6 +1689,7 @@ do
 					Position = UDim2.new(0, 0, 0.5, 0),
 					Size = UDim2.new(1, 0, 0, 4),
 					ZIndex = 3,
+					Image = "rbxassetid://5028857472",
 					ImageColor3 = themes.LightContrast,
 					ScaleType = Enum.ScaleType.Slice,
 					SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1662,6 +1699,7 @@ do
 						BackgroundTransparency = 1,
 						Size = UDim2.new(0.8, 0, 1, 0),
 						ZIndex = 3,
+						Image = "rbxassetid://5028857472",
 						ImageColor3 = themes.TextColor,
 						ScaleType = Enum.ScaleType.Slice,
 						SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1675,6 +1713,7 @@ do
 							Position = UDim2.new(1, 0, 0.5, 0),
 							Size = UDim2.new(0, 10, 0, 10),
 							ZIndex = 3,
+							Image = "rbxassetid://4608020054"
 						})
 					})
 				})
@@ -1777,6 +1816,7 @@ do
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 30),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = themes.DarkContrast,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
@@ -1803,6 +1843,7 @@ do
 					Position = UDim2.new(1, -28, 0.5, -9),
 					Size = UDim2.new(0, 18, 0, 18),
 					ZIndex = 3,
+					Image = "rbxassetid://5012539403",
 					ImageColor3 = themes.TextColor,
 					SliceCenter = Rect.new(2, 2, 298, 298)
 				})
@@ -1813,6 +1854,7 @@ do
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 1, -34),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = themes.Background,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
@@ -2229,6 +2271,7 @@ do
 				BorderSizePixel = 0,
 				Size = UDim2.new(1, 0, 0, 30),
 				ZIndex = 2,
+				Image = "rbxassetid://5028857472",
 				ImageColor3 = themes.DarkContrast,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(2, 2, 298, 298)
