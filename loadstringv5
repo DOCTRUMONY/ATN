@@ -570,7 +570,7 @@ do
 				Name = "Flash",
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
-				Image = "rbxassetid://4641149554",
+				Image = "rbxassetid://71267993476697",
 				ImageColor3 = themes.TextColor,
 				ZIndex = 5
 			}),
