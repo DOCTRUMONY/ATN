@@ -429,7 +429,7 @@ do
 		}, section)
 	end
 
-	function library:addPage(data)
+	function library:addfart(data)
 		local title = data.title or "Page"
 		local icon = data.icon
 
