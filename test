@@ -1,0 +1,108 @@
+-- Simple function name randomizer for Venyx UI Library
+-- Add this code at the very beginning of your script
+
+-- Function to generate random names
+local function randomString(length)
+    local chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    local result = ""
+    math.randomseed(tick())
+    for i = 1, length or math.random(5, 10) do
+        result = result .. chars:sub(math.random(1, #chars), math.random(1, #chars))
+    end
+    return result
+end
+
+-- Load the original Venyx library
+local originalLib = loadstring(game:HttpGet("https://raw.githubusercontent.com/Stefanuk12/Venyx-UI-Library/main/source2.lua"))()
+
+-- Save the original functions before we replace them
+local originalFunctions = {
+    new = originalLib.new,
+    addPage = page and page.addPage or nil,
+    addSection = page and page.addSection or nil,
+    addToggle = section and section.addToggle or nil,
+    addButton = section and section.addButton or nil,
+    addTextbox = section and section.addTextbox or nil,
+    addKeybind = section and section.addKeybind or nil,
+    addColorPicker = section and section.addColorPicker or nil,
+    addSlider = section and section.addSlider or nil,
+    addDropdown = section and section.addDropdown or nil
+}
+
+-- Randomize the critical UI element functions - these are what anticheats typically scan for
+local functionNames = {
+    addToggle = randomString(),
+    addButton = randomString(),
+    addTextbox = randomString(),
+    addKeybind = randomString(),
+    addColorPicker = randomString(),
+    addSlider = randomString(),
+    addDropdown = randomString()
+}
+
+-- Add this code right after the Venyx library is loaded in your script
+-- This is the code that will actually do the randomization
+local function randomizeVenyxFunctions()
+    -- Wait until the section metatable is available
+    local success = false
+    local attempts = 0
+    
+    repeat
+        -- Try to access the section metatable
+        if section and getmetatable(section) and getmetatable(section).__index then
+            success = true
+            
+            -- Store the original functions under random names and remove the originals
+            for funcName, randomName in pairs(functionNames) do
+                if section[funcName] then
+                    section[randomName] = section[funcName]  -- Create randomized function
+                    section[funcName] = nil  -- Remove original function
+                end
+            end
+            
+            -- Update the metatable to use our randomized functions
+            local mt = getmetatable(section)
+            local originalIndex = mt.__index
+            
+            mt.__index = function(t, k)
+                -- If someone tries to access original function name, redirect to our random one
+                if functionNames[k] then
+                    return t[functionNames[k]]
+                end
+                
+                -- Otherwise use the original __index behavior
+                if type(originalIndex) == "function" then
+                    return originalIndex(t, k)
+                else
+                    return originalIndex[k]
+                end
+            end
+        end
+        
+        attempts = attempts + 1
+        if not success and attempts < 10 then
+            wait(0.1)  -- Wait a bit before trying again
+        end
+    until success or attempts >= 10
+    
+    if success then
+        print("Venyx functions have been randomized for anti-detection")
+    else
+        print("Failed to randomize Venyx functions")
+    end
+end
+
+-- Map to translate between original and randomized names
+local VenyxRandomMap = {}
+VenyxRandomMap.getRandomName = function(originalName)
+    return functionNames[originalName] or originalName
+end
+
+-- Usage example:
+-- To call addButton, use: section[VenyxRandomMap.getRandomName("addButton")](section, {...})
+
+-- Call this after you've loaded the Venyx library
+randomizeVenyxFunctions()
+
+-- Return the mapping helper
+return VenyxRandomMap
