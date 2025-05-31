@@ -1,5 +1,5 @@
 -- init
-local player = game:GetService("Players").LocalPlayer
+local player = game.Players.LocalPlayer
 local mouse = player:GetMouse()
 
 -- services
@@ -211,7 +211,7 @@ do
 	page.__index = page
 	section.__index = section
 
-	-- new classes 71267993476697
+	-- new classes
 
 	function library.new(data)
 		local title = data.title or "Venyx"
@@ -225,7 +225,7 @@ do
 				BackgroundTransparency = 1,
 				Position = UDim2.new(0.25, 0, 0.052435593, 0),
 				Size = UDim2.new(0, 511, 0, 428),
-				Image = "rbxassetid://76629785355983",
+				Image = "rbxassetid://4641149554",
 				ImageColor3 = themes.Background,
 				ScaleType = Enum.ScaleType.Slice,
 				SliceCenter = Rect.new(4, 4, 296, 296)
@@ -570,7 +570,7 @@ do
 				Name = "Flash",
 				Size = UDim2.new(1, 0, 1, 0),
 				BackgroundTransparency = 1,
-				Image = "rbxassetid://76629785355983",
+				Image = "rbxassetid://4641149554",
 				ImageColor3 = themes.TextColor,
 				ZIndex = 5
 			}),
@@ -707,7 +707,7 @@ do
 	function section:addButton(data)
 		local this = {}
 		this.title = data.title or "nil text"
-		this.callback = data.callback or function() end
+        this.callback = data.callback or function() end
 
 		local button = utility:Create("ImageButton", {
 			Name = "Button",
@@ -763,12 +763,12 @@ do
 		end)
 
 		function this:Update(dataOptions)
-			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
-				if (module.Options[i] and i ~= "Update") then
-					module.Options[i] = tostring(v)
-				end
-			end
+            -- // Overwriting settings
+            for i,v in pairs(dataOptions) do
+                if (module.Options[i] and i ~= "Update") then
+                    module.Options[i] = tostring(v)
+                end
+            end
 
 			return section:updateButton(module)
 		end
@@ -841,10 +841,10 @@ do
 
 		function this:Update(dataOptions)
 			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
-				if (module.Options[i] and i ~= "Update") then
-					module.Options[i] = tostring(v)
-				end
+            for i,v in pairs(dataOptions) do
+                if (module.Options[i] and i ~= "Update") then
+                    module.Options[i] = tostring(v)
+                end
 			end
 
 			return section:updateToggle(module)
@@ -964,10 +964,10 @@ do
 
 		function this:Update(dataOptions)
 			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
-				if (module.Options[i] and i ~= "Update") then
-					module.Options[i] = tostring(v)
-				end
+            for i,v in pairs(dataOptions) do
+                if (module.Options[i] and i ~= "Update") then
+                    module.Options[i] = tostring(v)
+                end
 			end
 
 			return section:updateTextbox(module)
@@ -1059,7 +1059,7 @@ do
 			animate()
 
 			if self.binds[keybind].connection then -- unbind
-				this.key = Enum.KeyCode.Unknown
+			    this.key = Enum.KeyCode.Unknown
 				return self:updateKeybind(module)
 			end
 
@@ -1077,10 +1077,10 @@ do
 
 		function this:Update(dataOptions)
 			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
-				if (module.Options[i] and i ~= "Update") then
-					module.Options[i] = tostring(v)
-				end
+            for i,v in pairs(dataOptions) do
+                if (module.Options[i] and i ~= "Update") then
+                    module.Options[i] = tostring(v)
+                end
 			end
 
 			return section:updateKeybind(module)
@@ -1610,10 +1610,10 @@ do
 
 		function this:Update(dataOptions)
 			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
-				if (module.Options[i] and i ~= "Update") then
-					module.Options[i] = tostring(v)
-				end
+            for i,v in pairs(dataOptions) do
+                if (module.Options[i] and i ~= "Update") then
+                    module.Options[i] = tostring(v)
+                end
 			end
 
 			return section:updateColorPicker(module)
@@ -1776,10 +1776,10 @@ do
 
 		function this:Update(dataOptions)
 			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
-				if (module.Options[i] and i ~= "Update") then
-					module.Options[i] = tostring(v)
-				end
+            for i,v in pairs(dataOptions) do
+                if (module.Options[i] and i ~= "Update") then
+                    module.Options[i] = tostring(v)
+                end
 			end
 
 			return section:updateSlider(module)
@@ -1927,8 +1927,8 @@ do
 		end)
 
 		function this:Update(dataOptions)
-			-- // Overwriting settings
-			for i,v in pairs(dataOptions) do
+		    -- // Overwriting settings
+            for i,v in pairs(dataOptions) do
 				if (i ~= "Update" and module.Options[i]) then
 					-- // Making everything in the list a string
 					if (i == "list") then
@@ -1938,9 +1938,9 @@ do
 					end
 
 					-- // Setting it
-					module.Options[i] = (i == "list" and v or tostring(v))
+                    module.Options[i] = (i == "list" and v or tostring(v))
 				end
-			end
+            end
 
 			return section:updateDropdown(module, {noOpen = dataOptions["list"]})
 		end
