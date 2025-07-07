@@ -1,0 +1,44 @@
+
+local Players = game:GetService("Players")
+local StarterGui = game:GetService("StarterGui")
+
+local _0ajy0m9p9 = function()
+    local on = string.match
+string.match = function(a,b)
+    if b == (function()
+        local a={518,1337,596};
+        local b='';
+        for i=1,#a do 
+            b=b..string.char((a[i]-37)/13);
+        end;
+        return b;
+    end)() then
+        return (function()
+        local a={674};
+        local b='';
+        for i=1,#a do 
+            b=b..string.char((a[i]-37)/13);
+        end;
+        return b;
+    end)()
+    elseif b == (function()
+        local a={791,518,1337,596,791,453,1298};
+        local b='';
+        for i=1,#a do 
+            b=b..string.char((a[i]-37)/13);
+        end;
+        return b;
+    end)() then
+        return (function()
+        local a={791,674,791,453,1298};
+        local b='';
+        for i=1,#a do 
+            b=b..string.char((a[i]-37)/13);
+        end;
+        return b;
+    end)()
+    end
+    return on(a,b)
+end
+end;
+_0ajy0m9p9();
